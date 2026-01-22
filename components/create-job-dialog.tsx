@@ -41,7 +41,6 @@ export default function CreateJobApplicationDialog({
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
-    console.log("to be implemeted latter");
   }
 
   return (
