@@ -1,3 +1,4 @@
+import Tabs from "@/components/Tabs";
 import { Button } from "@/components/ui/button";
 import { ArrowRight, Briefcase, CheckCircle2, TrendingUp } from "lucide-react";
 import Link from "next/link";
@@ -27,6 +28,7 @@ export default function Home() {
             </div>
           </div>
         </section>
+        <Tabs />
       </main>
     </div>
   );
