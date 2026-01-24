@@ -2,7 +2,7 @@ import { getSession } from "@/lib/auth/auth";
 import connectDB from "@/lib/dbConnection";
 import { Board } from "@/lib/models";
 import { redirect } from "next/navigation";
-//import KanbanBoard from "@/components/kanban-board";
+import KanbanBoard from "@/components/kanban-board";
 import { Suspense } from "react";
 
 async function getBoard(userId: string) {
@@ -42,7 +42,7 @@ async function DashboardPage() {
           <h1 className="text-3xl font-bold text-black">Job Hunt</h1>
           <p className="text-gray-600">Track your job applications</p>
         </div>
-        {/* <KanbanBoard board={board} userId={session.user.id} /> */}
+        <KanbanBoard board={board} userId={session.user.id} />
       </div>
     </div>
   );
