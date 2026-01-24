@@ -3,8 +3,8 @@ export const getPasswordStrengthLevel = (password:string,passwordStrength:number
     if (password.length < 8) return 1; // Too short
     if (passwordStrength < 40) return 2; // Weak
     if (passwordStrength < 70) return 3; // Fair
-    if (passwordStrength < 80) return 4; //Good
-    return 5; // Strong
+    if (passwordStrength < 80) return 4; //Strong
+    return 5; // very Strong
   };
 
  export const getStrengthBars = (password:string,passwordStrength:number) => {
