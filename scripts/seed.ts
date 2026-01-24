@@ -32,7 +32,6 @@ const SAMPLE_JOBS = [
     jobUrl: "https://example.com/jobs/3",
     salary: "$90k - $110k",
   },
-  // Applied
   {
     company: "LeaFood",
     position: "DevOps Engineer",
@@ -69,7 +68,6 @@ const SAMPLE_JOBS = [
     jobUrl: "https://example.com/jobs/7",
     salary: "$95k - $120k",
   },
-  // Interviewing
   {
     company: "Retomotion",
     position: "Web Designer",
@@ -98,7 +96,7 @@ const SAMPLE_JOBS = [
     jobUrl: "https://example.com/jobs/10",
     salary: "$115k - $145k",
   },
-  // Offer
+  
   {
     company: "Profan",
     position: "Software Developer",
@@ -118,7 +116,6 @@ const SAMPLE_JOBS = [
     jobUrl: "https://example.com/jobs/12",
     salary: "$90k - $110k",
   },
-  // Rejected
   {
     company: "Ultra Vouche",
     position: "Associate",
@@ -162,7 +159,6 @@ async function seed() {
     await connectDB();
     console.log("✅ Connected to database");
 
-    // Find the user's board
     let board = await Board.findOne({ userId: USER_ID, name: "Job Hunt" });
 
     if (!board) {
@@ -173,8 +169,6 @@ async function seed() {
     } else {
       console.log("✅ Board found");
     }
-
-    // Get all columns
     const columns = await Column.find({ boardId: board._id }).sort({
       order: 1,
     });
@@ -187,13 +181,11 @@ async function seed() {
       process.exit(1);
     }
 
-    // Map column names to column IDs
     const columnMap: Record<string, string> = {};
     columns.forEach((col) => {
       columnMap[col.name] = col._id.toString();
     });
 
-    // Clear existing job applications for this user
     const existingJobs = await JobApplication.find({ userId: USER_ID });
     if (existingJobs.length > 0) {
       console.log(
@@ -201,14 +193,12 @@ async function seed() {
       );
       await JobApplication.deleteMany({ userId: USER_ID });
 
-      // Clear job applications from columns
       for (const column of columns) {
         column.jobApplications = [];
         await column.save();
       }
     }
 
-    // Distribute jobs across columns
     const jobsByColumn: Record<string, typeof SAMPLE_JOBS> = {
       "Wish List": SAMPLE_JOBS.slice(0, 3),
       Applied: SAMPLE_JOBS.slice(3, 7),
